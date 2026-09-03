@@ -1,0 +1,64 @@
+{
+  "scopeName": "inline.sedativ.languages",
+  "injectionSelector": "L:source.js, L:source.ts",
+  "patterns": [
+    {
+      "name": "string.quoted.template.html.js",
+      "begin": "(html|ref\\.html)\\s*(`)",
+      "beginCaptures": {
+        "1": { "name": "entity.name.function.tagged-template.js" },
+        "2": { "name": "punctuation.definition.string.template.begin.js" }
+      },
+      "end": "`",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.template.end.js" }
+      },
+      "patterns": [
+        {
+          "begin": "\\$\\{",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.template-expression.begin.js" }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.template-expression.end.js" }
+          },
+          "name": "meta.template.expression.js",
+          "patterns": [
+            { "include": "source.js" }
+          ]
+        },
+        { "include": "text.html.basic" }
+      ]
+    },
+    {
+      "name": "string.quoted.template.sql.js",
+      "begin": "(sql|ref\\.sql)\\s*(`)",
+      "beginCaptures": {
+        "1": { "name": "entity.name.function.tagged-template.js" },
+        "2": { "name": "punctuation.definition.string.template.begin.js" }
+      },
+      "end": "`",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.template.end.js" }
+      },
+      "patterns": [
+        {
+          "begin": "\\$\\{",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.template-expression.begin.js" }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.template-expression.end.js" }
+          },
+          "name": "meta.template.expression.js",
+          "patterns": [
+            { "include": "source.js" }
+          ]
+        },
+        { "include": "source.sql" }
+      ]
+    }
+  ]
+}

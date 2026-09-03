@@ -1,0 +1,50 @@
+{
+  "name": "sedativ-vscode",
+  "displayName": "Sedativ",
+  "description": "Sedativ support for VS Code",
+  "version": "1.0.0",
+  "publisher": "Sedativ",
+  "icon": "sedativ.png",
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "sedativ",
+    "framework",
+    "highlight",
+    "snippets",
+    "state management",
+    "web components",
+    "template literals",
+    "js",
+    "html",
+    "sql"
+  ],
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sedativjs/sedativ-vscode"
+  },
+  "contributes": {
+    "grammars": [
+      {
+        "scopeName": "inline.sedativ.languages",
+        "injectTo": [
+          "source.js",
+          "source.mjs",
+          "source.ts",
+          "source.mts"
+        ],
+        "path": "./highlight.json"
+      }
+    ],
+    "snippets": [
+      { "language": "javascript", "path": "./snippets.json" },
+      { "language": "typescript", "path": "./snippets.json" }
+    ]
+  }
+}

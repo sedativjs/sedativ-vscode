@@ -1,0 +1,97 @@
+{
+  "$(value)": {
+    "prefix": "$s",
+    "body": [
+      "const $1 = \\$($2)"
+    ],
+    "description": "Inserts signal"
+  },
+  "$(value, 'key-name')": {
+    "prefix": "$d",
+    "body": [
+      "const $1 = \\$($3, '$2')"
+    ],
+    "description": "Inserts persisted signal"
+  },
+  "$(fn)": {
+    "prefix": "$e",
+    "body": [
+      "\\$(() => {",
+      "  $1",
+      "})"
+    ],
+    "description": "Inserts side effect"
+  },
+  "$(fn, 'tag-name')": {
+    "prefix": "$w",
+    "body": [
+      "\\$(ref => {",
+      "  ref.html`$2`",
+      "}, '$1')"
+    ],
+    "description": "Inserts component"
+  },
+  "body: new FormData()": {
+    "prefix": "$f",
+    "body": [
+      "\\$(ref => {",
+      "  ref.html`",
+      "    <form action=\"$2\" method=\"$3\">$4</form>",
+      "  `",
+      "",
+      "  ref.onsubmit = async event => {",
+      "    event.preventDefault()",
+      "    await fetch(event.target.action, {",
+      "      method: event.target.method,",
+      "      body: new FormData(event.target),",
+      "    })",
+      "  }",
+      "}, '$1')"
+    ],
+    "description": "Inserts HTML form handler"
+  },
+  "body: JSON.stringify()": {
+    "prefix": "$r",
+    "body": [
+      "\\$(ref => {",
+      "  ref.onsubmit = async event => {",
+      "    event.preventDefault()",
+      "    await fetch('$2', {",
+      "      method: '$3',",
+      "      headers: { 'content-type': 'application/json' },",
+      "      body: JSON.stringify({ $4 }),",
+      "    })",
+      "  }",
+      "}, '$1')"
+    ],
+    "description": "Inserts JSON request handler"
+  },
+  "headers: { 'content-type': 'text/plain' }": {
+    "prefix": "$q",
+    "body": [
+      "\\$(req => {",
+      "  if (req.method === '$1') {",
+      "    return new Response(",
+      "      '$2',",
+      "      { status: 200, statusText: 'OK', headers: { 'content-type': 'text/plain' } }",
+      "    )",
+      "  }",
+      "})"
+    ],
+    "description": "Inserts text response handler"
+  },
+  "headers: { 'content-type': 'application/json' }": {
+    "prefix": "$a",
+    "body": [
+      "\\$(req => {",
+      "  if (req.method === '$1') {",
+      "    return new Response(",
+      "      JSON.stringify({ $2 }),",
+      "      { status: 200, statusText: 'OK', headers: { 'content-type': 'application/json' } }",
+      "    )",
+      "  }",
+      "})"
+    ],
+    "description": "Inserts JSON response handler"
+  }
+}
